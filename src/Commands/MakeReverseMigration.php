@@ -104,7 +104,11 @@ class MakeReverseMigration extends Command
         } else {
             if ($typeName == 'decimal' || $typeName == 'double' || $typeName == 'float' ) { //decimal check
                 preg_match('#\((.*?)\)#', $array[0], $length);
-                $length = ", ".str_replace(',',', ',$length[1]);
+                if(isset($length[1])) {
+                    $length = ", ".str_replace(',',', ',$length[1]);
+                } else {
+                    $length = '';
+                }
                 $result = "->" . $this->morph[$typeName] . "('" . $column->Field . "'".$length.")";
             }
             else{
