@@ -2,6 +2,7 @@
 namespace GGuney\RMigration\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Str;
 
 class MakeReverseMigration extends Command
 {
@@ -179,7 +180,7 @@ class MakeReverseMigration extends Command
     private function replaceStub($tableName, $string, $keys)
     {
         $stub = $this->getStub();
-        $className = 'Create' . studly_case($tableName) . 'Table';
+        $className = 'Create' . Str::studly($tableName) . 'Table';
         $stub = str_replace(['{CLASS_NAME}', '{TABLE_NAME}', '{FIELDS}', '{KEYS}'],
             [$className, $tableName, $string, $keys], $stub);
         return $stub;
