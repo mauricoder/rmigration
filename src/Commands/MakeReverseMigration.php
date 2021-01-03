@@ -310,7 +310,7 @@ class MakeReverseMigration extends Command
 
     private function getAllTables()
     {
-        $tables = \DB::select('SHOW TABLES');
+        $tables = \DB::select("SHOW FULL TABLES where Table_Type != 'VIEW'");
         return $tables;
 
     }
